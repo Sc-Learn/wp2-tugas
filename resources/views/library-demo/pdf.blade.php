@@ -27,7 +27,6 @@
         <p>Ini adalah contoh dokumen PDF yang di-generate menggunakan DomPDF.</p>
     </div>
 
-    <!-- tambahkan tampilan table users -->
     <table border="1" cellspacing="0" cellpadding="5" width="100%">
         <thead>
             <tr>

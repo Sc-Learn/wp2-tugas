@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Intervention\Image\Facades\Image;
-use App\Exports\UsersExport;
 
 class LibraryDemoController extends Controller
 {
@@ -15,14 +11,30 @@ class LibraryDemoController extends Controller
         return view('library-demo.index');
     }
 
-    public function exportPDF()
+
+    /**
+     * Export file PDF dengan judul dan nama file yang diberikan.
+     *
+     * @param string $title Judul dari file PDF yang akan di-download.
+     * @param string $filename Nama file PDF yang akan di-download.
+     * @return \Illuminate\Http\Response Objek response dari file PDF yang akan di-download.
+     */
+    public function exportPDF($title, $filename)
     {
+        /*
+         * Data yang akan dikirim ke view
+         * Kita akan mengirimkan judul dan tanggal hari ini
+         * tanggal hari ini kita ambil dengan fungsi date()
+         */
         $data = [
-            'title' => 'Contoh PDF',
+            'title' => $title,
             'date' => date('d/m/Y')
         ];
 
+        // Kode untuk me-load view 'library-demo.pdf' dan juga mengirimkan data ke view tersebut
         $pdf = PDF::loadView('library-demo.pdf', $data);
-        return $pdf->download('contoh.pdf');
+
+        # Kode untuk men-download file PDF
+        return $pdf->download($filename);
     }
 }

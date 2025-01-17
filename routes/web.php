@@ -29,3 +29,9 @@ use App\Http\Controllers\LibraryDemoController;
 
 Route::get('/library-demo', [LibraryDemoController::class, 'index'])->name('library.demo');
 Route::get('/export-pdf', [LibraryDemoController::class, 'exportPDF'])->name('export.pdf');
+
+
+use App\Http\Controllers\BookController;
+
+Route::resource('books', BookController::class);
+Route::get('books-report', [BookController::class, 'generatePDF'])->name('books.report');
